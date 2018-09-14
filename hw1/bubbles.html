@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    #defaultCanvas0{
+      position: relative;
+
+      left: 50%;
+      top: 50%;
+      margin-left: -25vw;
+      margin-top: 25vh;
+
+
+    }
+    body{
+      margin: 0;
+    }
+  </style>
+  <body>
+    <div class="container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    var bubbles = [];
+    var widthX = window.innerWidth*0.5
+    var heightY = window.innerHeight*0.5
+    var colorArray = [
+    	'#3C989E',
+    	'#5DB5A4',
+    	'#F4CDA5',
+    	'#F57A82',
+    	'#ED5276'
+    ]
+
+    var getRandomColor = colorArray[Math.floor( Math.random () * colorArray.length )]
+
+    function setup() {
+        createCanvas(widthX, heightY);
+
+      	for (var i = 0; i < 20; i++) {
+
+      		bubbles.push({
+      			x: random(width),
+      			y: random(height),
+      			radius: random(10, 100),
+      		});
+      	}
+      }
+
+    function  draw(){
+      background(88, 183, 184);
+
+      for (var i = 0; i < bubbles.length; i++) {
+      		var bubble = bubbles[i];
+          stroke(248, 206, 61, 102);
+          if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
+      			if (mouseIsPressed) {
+      				bubbles.splice(i, 1); // remove this bubble!
+      			}
+      			fill(223, 97, 39);
+      		} else {
+      			fill(242, 228, 177, 100);
+      		}
+
+          ellipse(bubble.x, bubble.y, bubble.radius*2);
+      		bubble.x += random(-10, 10);
+      		bubble.y += random(-10, 10);
+      	}
+
+
+    }
+
+    </script>
+  </body>
+</html>
