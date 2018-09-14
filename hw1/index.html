@@ -39,7 +39,7 @@
     function setup() {
         createCanvas(widthX, heightY);
 
-      	for (var i = 0; i < 20; i++) {
+      	for (var i = 0; i < 30; i++) {
 
       		bubbles.push({
       			x: random(width),
@@ -55,6 +55,7 @@
 
       for (var i = 0; i < bubbles.length; i++) {
       		var bubble = bubbles[i];
+
           stroke(1, 220, 120);
           if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
       			if (mouseIsPressed) {
@@ -66,21 +67,26 @@
       		}
 
           ellipse(bubble.x, bubble.y, bubble.radius*2);
-      		bubble.x += random(-10, 10);
-      		bubble.y += random(-10, 10);
-      	}
-      translate(width/2, height/2);
+           translate(width/2, height/2);
+          for(var t =0; t < width/100; t+=1){
+              // colorMode(HSB, 100, 10, 10);
+              fill(100,240,204)
+              ellipse(t,0,10+t);
+              stroke(t,80,180,100+t);
+              strokeWeight(3);
+              noFill();
+              ellipse(t,0,t);
+              line(t, 0, 0,t);
+              ellipse(t+130,0,t);
+              line(t+130,100,t, t);
 
-      for(var i =0; i < width/10; i+=1){
-          // colorMode(HSB, 100, 10, 10);
-          stroke(i,80,180,100+i);
-          strokeWeight(3);
-          noFill();
-          line(i, 0, 0,i);
-          line(i+130,100,i, i);
-          triangle(i+200,150,i+220,140,i+210,100);
-          rotate(mouseX*0.0002);
-      }
+              rotate(mouseX*0.0002);
+          }
+          rotate(mouseY*0.0002);
+      	}
+
+
+
 
     }
 
