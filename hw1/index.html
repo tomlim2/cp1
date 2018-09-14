@@ -60,9 +60,9 @@
       			if (mouseIsPressed) {
       				bubbles.splice(i, 1); // remove this bubble!
       			}
-      			fill(255, 200, 200);
+      			fill(100, 100, 200);
       		} else {
-      			fill(255, 250, 200);
+      			fill(155, 150, 200);
       		}
 
           ellipse(bubble.x, bubble.y, bubble.radius*2);
@@ -72,7 +72,7 @@
       translate(width/2, height/2);
 
       for(var i =0; i < width/10; i+=1){
-          colorMode(HSB, 100, 10, 10);
+          // colorMode(HSB, 100, 10, 10);
           stroke(i,80,180,100+i);
           strokeWeight(3);
           noFill();
