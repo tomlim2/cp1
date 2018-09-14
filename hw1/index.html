@@ -24,31 +24,62 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
     var bubbles = [];
+    var widthX = window.innerWidth*0.5
+    var heightY = window.innerHeight*0.5
+    var colorArray = [
+    	'#3C989E',
+    	'#5DB5A4',
+    	'#F4CDA5',
+    	'#F57A82',
+    	'#ED5276'
+    ]
 
-    function setup(){
-      createCanvas(window.innerWidth*0.5,window.innerHeight*0.5);
-      for (var i = 0; i < 200; i++) {
-        bubbles.push({
-          x:random(width),
-          y:random(height),
-          radius:random(1,200),
+    var getRandomColor = colorArray[Math.floor( Math.random () * colorArray.length )]
 
-        });
+    function setup() {
+        createCanvas(widthX, heightY);
+
+      	for (var i = 0; i < 20; i++) {
+
+      		bubbles.push({
+      			x: random(width),
+      			y: random(height),
+      			radius: random(10, 100),
+            color: colorArray[Math.floor( Math.random () * colorArray.length )]
+      		});
+      	}
       }
 
-    }
-
     function  draw(){
-      background(255,120,000)
-      for (var i = 0; i < bubbles.length; i++) {
-        var bubble = bubbles[i];
-        ellipse(bubble.x, bubble.y, bubble.radius);
+      background(255, 120, 000);
 
-        // bubble.radius -= 2;
-        var timer = Date.now()*0.0012;
-        bubble.radius -= i * 0.008;
-        bubble.x = Math.cos(timer)*i;
-        bubble.y = Math.sin(timer)*i;
+      for (var i = 0; i < bubbles.length; i++) {
+      		var bubble = bubbles[i];
+          stroke(1, 220, 120);
+          if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
+      			if (mouseIsPressed) {
+      				bubbles.splice(i, 1); // remove this bubble!
+      			}
+      			fill(255, 200, 200);
+      		} else {
+      			fill(255, 250, 200);
+      		}
+
+          ellipse(bubble.x, bubble.y, bubble.radius*2);
+      		bubble.x += random(-10, 10);
+      		bubble.y += random(-10, 10);
+      	}
+      translate(width/2, height/2);
+
+      for(var i =0; i < width/10; i+=1){
+          colorMode(HSB, 100, 10, 10);
+          stroke(i,80,180,100+i);
+          strokeWeight(3);
+          noFill();
+          line(i, 0, 0,i);
+          line(i+130,100,i, i);
+          triangle(i+200,150,i+220,140,i+210,100);
+          rotate(mouseX*0.0002);
       }
 
     }
