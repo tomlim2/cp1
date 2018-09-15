@@ -23,49 +23,51 @@
     <div class="container"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
-    var bubbles = [];
-    var widthX = window.innerWidth*0.5
-    var heightY = window.innerHeight*0.5
-    var colorArray = [
-    	
-    ]
-    var getRandomColor = colorArray[Math.floor( Math.random () * colorArray.length )]
+   var bubbles = [];
+   function setup() {
+     createCanvas(window.innerWidth/2, window.innerHeight/2);
 
-    function setup() {
-        createCanvas(widthX, heightY);
+     for (var i = 0; i < 10; i++) {
+       bubbles.push({
+         x: random(width),
+         y: random(height),
+         radius: random(50, 100)
+       });
+     }
+   }
+   function draw() {
+     var color1 = color(1,70,86);
+     var color2 = color(0,158,169);
+     var color3 = color(248,247,245);
+     var color4 = color(250,217,86);
+     background(color3);
 
-      	for (var i = 0; i < 20; i++) {
+     for (var i = 0; i < bubbles.length; i++) {
+       var bubble = bubbles[i];
 
-      		bubbles.push({
-      			x: random(width),
-      			y: random(height),
-      			radius: random(10, 100),
-      		});
-      	}
-      }
+       if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
+         // if (mouseIsPressed) {
+         //   bubbles.splice(i, 1); // remove this bubble!
+         // }
+         stroke(color1);
+         fill(color2);
+       } else {
+         fill(color4);
+       }
 
-    function  draw(){
-      background(88, 183, 184);
+       ellipse(bubble.x, bubble.y, bubble.radius*2);
+       bubble.x += random(-1,1);
+       bubble.y += random(-1,1);
+     }
 
-      for (var i = 0; i < bubbles.length; i++) {
-      		var bubble = bubbles[i];
-          stroke(248, 206, 61, 102);
-          if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
-      			if (mouseIsPressed) {
-      				bubbles.splice(i, 1); // remove this bubble!
-      			}
-      			fill(223, 97, 39);
-      		} else {
-      			fill(242, 228, 177, 100);
-      		}
-
-          ellipse(bubble.x, bubble.y, bubble.radius*2);
-      		bubble.x += random(-10, 10);
-      		bubble.y += random(-10, 10);
-      	}
-
-
-    }
+     if (mouseIsPressed) {
+       bubbles.push({
+         x: random(width),
+         y: random(height),
+         radius: random(50, 100)
+       });
+     }
+   }
 
     </script>
   </body>
