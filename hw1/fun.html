@@ -24,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
     var bubbles = [];
+    var cubes = [];
     var widthX = window.innerWidth*0.5
     var heightY = window.innerHeight*0.5
     var colorArray = [
@@ -39,37 +40,34 @@
     function setup() {
         createCanvas(widthX, heightY);
 
-      	for (var i = 0; i < 20; i++) {
-
-      		bubbles.push({
+      	for (var i = 0; i < 30; i++) {
+          cubes.push({
       			x: random(width),
       			y: random(height),
-      			radius: random(10, 100),
-            color: colorArray[Math.floor( Math.random () * colorArray.length )]
+      			width: random(10, 100),
+            height: random(10, 100),
       		});
+
       	}
       }
 
     function  draw(){
       background(255, 120, 000);
-
-      for (var i = 0; i < bubbles.length; i++) {
-      		var bubble = bubbles[i];
-          stroke(1, 220, 120);
-          if (dist(mouseX, mouseY, bubble.x, bubble.y) < bubble.radius) {
-      			if (mouseIsPressed) {
-      				bubbles.splice(i, 1); // remove this bubble!
-      			}
-      			fill(255, 200, 200);
+      for (var i = 0; i < cubes.length; i++) {
+      		var cube = cubes[i];
+          if (dist(mouseX, mouseY, cubes.x, cubes.y) < cubes.width,cubes.height) {
+      			// if (mouseIsPressed) {
+      			// 	bubbles.splice(i, 1); // remove this bubble!
+      			// }
+      			fill(100, 100, 200);
       		} else {
-      			fill(255, 250, 200);
+      			fill(155, 150, 200);
       		}
 
-          ellipse(bubble.x, bubble.y, bubble.radius*2);
-      		bubble.x += random(-10, 10);
-      		bubble.y += random(-10, 10);
+          rect(cubes.x, cubes.y, cubes.width, cubes.height);
+
       	}
-      
+
 
     }
 

@@ -23,36 +23,111 @@
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
+    var colorArray = [
+      'color(15,106,149)',
+      'color(232, 104, 150)',
+      'color(195, 104, 148)',
+      'color(131, 104, 144)',
+      'color(70, 105, 141)'
+    ]
+    var getRandomColor = colorArray[Math.floor( Math.random () * colorArray.length )]
+
     function setup() {
-    createCanvas(400, 400);
+    createCanvas(500, 500);
+    frameRate(2);
     }
-
+    var x = 10;
+    var moveX = 50;
     function draw() {
-    background(240);
 
-    noStroke();
+      var ran1 = random(-100,5);
+      var ran2 = random(-10,100);
+      var ran3 = random(-50,80);
+      var ran4 = random(-80,80);
+      var ran5 = random(-45,5);
+      var ran6 = random(-5,5);
+      var ran7 = random(-25,25);
+      var ran8 = random(-25,25);
+      var ran9 = random(200,255);
 
-    fill(0, 120, 255);
-    rect(0, 320, 80, 80);
+      var color1 = color(15,106,149);
+      var color2 = color(232, 104, 150);
+      var color3 = color(195, 104, 148);
+      var color4 = color(131, 104, 144);
+      var color5 = color(70, 105, 141);
+      var white = color(255,255,255);
 
-    fill(220, 0, 0);
-    rect(80, 0, 320, 320);
+      var packposX = 200 + ran7;
+      var packposY = 200 + ran8;
+      var packcolor = color(ran9, 105, 141);
 
-    fill(255, 235, 0);
-    rect(370, 360, 30, 40);
+      var lineY1 = 150 + ran2;
+      var lineY2 = 320;
+      var lineY3 = 380 + ran3;
 
-    stroke(0);
-    strokeWeight(10);
-    strokeCap(SQUARE);
-    line(80, 0, 80, 400);
-    line(0, 320, 400, 320);
-    line(370, 320, 370, 400);
+      var lineX1 = 180 + ran4
+      var lineX2 = 410;
 
-    strokeWeight(20);
-    line(0, 150, 80, 150);
+      var rect1Height = 280 + ran1;
 
-    strokeWeight(15);
-    line(370, 360, 400, 360);
+      var bezierY1 = 100  + ran5;
+      var bezierY2 = 480  + ran6;
+
+      // colorMode(RGB);
+      background(white);
+
+
+      noStroke();
+
+      fill(color2);
+      rect(0, 320, 80, 180);
+
+      fill(color3);
+      rect(80, 0, 330, 320);
+
+      fill(color4);
+      rect(410, 0, 90, height);
+
+      stroke(0);
+      strokeWeight(10);
+      strokeCap(SQUARE);
+      line(80, 0, 80, height);
+      line(0, lineY2, 410, lineY2);
+
+
+      strokeWeight(10);
+      line(0, lineY1, 80, lineY1);
+
+      fill(color5);
+      rect(80, -10, 330, rect1Height);
+
+      fill(packcolor);
+      strokeWeight(10);
+      arc(packposX, packposY, 100, 100, random(0*Math.PI/180, 20*Math.PI/180), random(260*Math.PI/180, 340*Math.PI/180), PIE);
+
+      strokeWeight(10);
+      line(lineX1, 320, lineX1, height);
+      line(lineX1, lineY3, 410, lineY3);
+
+      strokeWeight(10);
+      line(lineX2, 0, lineX2, height);
+
+      noFill();
+      // line(500, 80, 380, 80);
+      // line(100, 480, 0, 480);
+      bezier(width, bezierY1, 380, bezierY1, 100, bezierY2, 0, bezierY2);
+
+      // colorMode(HSB);
+      fill(x,100,100);
+      ellipse(x,200,20);
+
+      x = x + moveX;
+      if(x>width){
+        moveX = -20;
+      }
+      if(x<0){
+        moveX = 20;
+      }
     }
     </script>
   </body>
