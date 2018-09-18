@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+      function setup() {
+        createCanvas(400, 400);
+        frameRate(3);
+      }
+
+      function draw() {
+        var ran1 = random(0,100);
+        var ran2 = random(-20,40);
+        var ran3 = random(0,-60);
+        var ran4 = random(0,-60);
+
+
+
+        var color1 = color(165 + ran1, 124, 204);
+        var color2 = color(63, 199 + ran1, 162);
+        var color3 = color(255 - ran1, 125, 96);
+        var color4 = color(227 + ran1, 209, 160);
+
+
+        background(244);
+        noStroke();
+        fill(color1);
+        rect(0, 0, 190, 160 + ran3);
+
+
+        stroke(0);
+        strokeWeight(10);
+        strokeCap(SQUARE);
+        fill(color2);
+        rect(-10, 280, 70, 130 + ran4);
+        fill(color3);
+        rect(190, 280, 130, 100 + ran2);
+
+        line(0, 160, width, 160);
+        line(0, 280, width, 280);
+        line(190, 00, 190, height);
+        line(320, 280, 320, height);
+        line(60, 280, 60, height);
+
+      }
+
+    </script>
+  </body>
+</html>
