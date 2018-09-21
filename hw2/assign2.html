@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <a href="../index.html">Home</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    function setup() {
+      createCanvas(400, 400);
+      }
+
+      var x = 10;
+      var changeInX = 3;
+      var y = 10;
+      var dy = 5;
+      var z = 20;
+      var dz = 15;
+
+      function draw() {
+        var ran1 = random(0,10);
+        var ran2 = random(0,10);
+
+        background(220);
+
+        ellipse(x, 200+ran2, 40);
+        ellipse(200+ran1, y, 40);
+        ellipse(x, y, 40);
+        ellipse(x, y, 40);
+        ellipse(z, y, 40);
+
+        x = x + changeInX;
+        y = y + dy;
+        z = z + dz;
+
+        if (x > width) {
+          changeInX = -3;
+        }
+
+        if (x < 0) {
+          changeInX = 3;
+        }
+
+        if (y > height) {
+          dy = -dy;
+        }
+
+        if (y < 0) {
+          dy = -dy;
+        }
+        if (z > height) {
+          dz = -dz;
+        }
+
+        if (z < 0) {
+          dz = -dz;
+        }
+      }
+
+    </script>
+  </body>
+</html>
