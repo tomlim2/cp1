@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <a href="../index.html">Home</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    function setup() {
+      createCanvas(600, 600);
+    }
+
+    // track the circle to draw next frame
+    let x = 25;
+    let y = 25;
+
+    function draw() {
+      colorMode(HSB);
+      stroke(255);
+
+      // draw circle with random hue
+      fill(random(255), 100, 100);
+      ellipse(x, y, 20);
+
+      // set up next circle
+      x = x + 25;
+
+      // if we hit the right edge, go down a line
+      if (x > width-25) {
+        x = 25;
+        y = y + 25;
+      }
+
+      // if we hit the bottom edge, reset to top
+      if (y > height-25) {
+        y = 25;
+      }
+    }
+
+    </script>
+  </body>
+</html>

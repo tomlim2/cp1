@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <a href="../index.html">Home</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    function setup() {
+      createCanvas(400, 400);
+
+    }
+
+    var fromX;
+    var fromY;
+    var toX;
+    var toY;
+    var step = 2.5;
+    var x = -100;
+    var dx = 2;
+    var y = 280;
+    var dy = -2;
+
+    function draw() {
+      background(0, 20, 80);
+
+      // draw background that fades stars slowly
+      background(0, 20, 80, 1);
+
+      // draw stars
+      if (random() > 0.9) {
+        stroke(255);
+        point(random(width), random(height));
+      }
+
+      // create shooting stars
+      if (random() > 0.95 && step >= 2.5) {
+        fromX = random(width);
+        fromY = random(height/2);
+        toX = random(fromX+10, width);
+        toY = random(fromY+10, height/2);
+        step = 0;
+      }
+
+      // draw shooting stars
+      if (step < 2.5) {
+        // fade background
+        let nextStep = step + 0.02;
+        strokeWeight(300);
+        stroke(0, 20, 80, 30);
+        line(fromX, fromY, toX, toY);
+        strokeWeight(1);
+        // draw star
+        if (step < 1) {
+          stroke(255, (1-step) * 200);
+          line(lerp(fromX, toX, step),     lerp(fromY, toY, step),
+               lerp(fromX, toX, nextStep), lerp(fromY, toY, nextStep));
+        }
+        step = nextStep;
+      }
+      noStroke();
+
+      x = x + dx;
+      y = y + dy;
+
+      if(x<200){
+        dy=0;
+      }
+
+      if(x > 200) {
+        dx = 0;
+        //Beam
+        fill(250,213,80)
+        triangle(100, 300, 200, 100, 300, 300);
+        dy=-2
+        if(y<100){
+          dy = 0;
+        }
+      }
+
+      var cow = 10;
+
+      fill(255)
+      rect(200, y, cow, cow/4*3);
+      rect(200+11, y, cow, cow/4*3);
+      rect(200-11, y, cow, cow/4*3);
+
+      //UFO
+      fill(255)
+      ellipse(x, 100, 100, 30);
+
+      // draw ground
+      noStroke();
+      fill(0, 10, 20);
+      rect(0, height*0.6, width, height);
+
+      // draw lake
+      noStroke();
+      fill(0, 20, 60);
+      ellipse(0, height, width*2.5, height*0.75);
+
+
+
+
+
+
+
+
+
+
+    }
+
+    </script>
+  </body>
+</html>
