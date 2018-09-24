@@ -23,25 +23,36 @@
     <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
+    function setup() {
+      createCanvas(400, 200);
+      colorMode(HSB, 360, 100, 100, 100);
+      }
 
-        function setup() {
-          createCanvas(255, 255);
-          background(220);
-          // HSB with H range 0-400, S range 0-400, B range 0-100:
-          colorMode(RGB, 255, 255, 255);
+      var x = 0;
+      var h = 10;
+
+      function draw() {
+        stroke(random(60, 70), 100, 90);
+        line(x, height-10, x + random(-10, 10), height-10-random(h));
+
+        x = x + 10;
+
+        if (x > width) {
+          x = random(10);
+          h = h + 3;
         }
 
-        function draw() {
-
-
-          let dog = random(width);
-          let cat = random(height);
-          let frog = random(height);
-          fill(dog, cat, frog);
-          noStroke()
-          ellipse(dog, cat, 10);
+        if (random() > 0.7) {
+          noStroke();
+          fill(255);
+          rect(-1, -1, width+2, height-15);
+          h = 10;
         }
 
+        noStroke();
+        fill(40, 100, 60);
+        rect(0, height-10, width, 10);
+      }
 
     </script>
   </body>

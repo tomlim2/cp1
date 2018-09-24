@@ -23,25 +23,36 @@
     <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
+    function setup() {
+      createCanvas(600, 600);
+    }
 
-        function setup() {
-          createCanvas(255, 255);
-          background(220);
-          // HSB with H range 0-400, S range 0-400, B range 0-100:
-          colorMode(RGB, 255, 255, 255);
-        }
+    // track the circle to draw next frame
+    let x = 25;
+    let y = 25;
 
-        function draw() {
+    function draw() {
+      colorMode(HSB);
+      stroke(255);
 
+      // draw circle with random hue
+      fill(random(255), 100, 100);
+      ellipse(x, y, 20);
 
-          let dog = random(width);
-          let cat = random(height);
-          let frog = random(height);
-          fill(dog, cat, frog);
-          noStroke()
-          ellipse(dog, cat, 10);
-        }
+      // set up next circle
+      x = x + 25;
 
+      // if we hit the right edge, go down a line
+      if (x > width-25) {
+        x = 25;
+        y = y + 25;
+      }
+
+      // if we hit the bottom edge, reset to top
+      if (y > height-25) {
+        y = 25;
+      }
+    }
 
     </script>
   </body>

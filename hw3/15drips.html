@@ -20,45 +20,39 @@
   }
   </style>
   <body>
-    <a href="../index.html">Home</a>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
-    var x = 210;
-    var y = 290;
-    var r = 0;
+    var x = 230;
+    var y = [220,260,300,340,380,420,460,500,540,580,620,660,700,740,780,820];
 
     function setup() {
       createCanvas(400, 400);
+      colorMode(HSB);
     }
 
     function draw() {
       background(0);
       noStroke();
 
-      // draw smokestack
-      fill(255);
-      rect(195, height, 30, -100);
+      // draw pipe
+      rect(0, 200, x, 20);
 
-      // darker as it gets closer to 0
-      push();
-      fill(y);
-      translate(x, y);
-      rotate(r);
-      rect(-10, -10, 20, 20);
-      pop();
+      // draw drip
+      for (var i = 0; i < y.length; i++) {
+        ellipse(x, y[i], 10);
+        y[i] = y[i] + 3
 
-      // up 3 pixels
-      y -= 3;
-
-      // rotate 0.05 radians ~= 2.8 degrees per frame
-      r += 0.05
-
-      // if reach past the top a bunch
-      if (y < -150) {
-        y = 290;
+        // if invisible for a full “height” amount…
+        if (y[i] > height*4) {
+          // reset
+          y[i] = 220;
+        }
       }
-    }
 
+
+
+    }
     </script>
   </body>
 </html>
