@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    function setup() {
+      createCanvas(400, 200);
+      colorMode(HSB, 360, 100, 100, 100);
+      }
+
+      var x = 0;
+      var h = 10;
+      var cut = -2;
+      var dcut = 10;
+
+      function draw() {
+        stroke(random(60, 70), 100, 90);
+        line(x, height-10, x + random(-10, 10), height-10-random(h));
+
+        x = x + 10;
+
+
+        var cutEnd = width+2
+        if (x > width) {
+          x = random(10);
+          h = h + 3;
+        }
+
+        if (mouseIsPressed) {
+          cut = cut + dcut;
+          noStroke();
+          fill(255);
+          rect(-1, -1, cut, height-15);
+          if(cut>cutEnd){
+            cut = -2;
+          }
+          h = 10;
+        }else{
+          cut = -2;
+        }
+
+        noStroke();
+        fill(40, 100, 60);
+        rect(0, height-10, width, 10);
+      }
+
+    </script>
+  </body>
+</html>
