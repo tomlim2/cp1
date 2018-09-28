@@ -47,7 +47,7 @@
         y[i] = y[i] + 3;
 
         // if invisible for a full “height” amount…
-        if (y[i] > height*2) {
+        if (y[i] > height*2 && ! mouseIsPressed) {
           // reset
           y[i] = 220;
         }
