@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    var x = 210;
+    var y = [];
+    var r = 0;
+    var sp = 200;
+
+
+    function setup() {
+      createCanvas(400, 400);
+      for (var i = 0; i < 30; i++) {
+        append(Smokes, {
+          y: random(1900,290),
+          spd: random(2.5,3),
+          sc: 1,
+          scup: random(0.01,0.1),
+        });
+      }
+    }
+    var Smokes = [];
+
+    function draw() {
+      background(0);
+      noStroke();
+
+      // draw smokestack
+      fill(255);
+      rect(195, height, 30, -100);
+
+
+      for (var i = 0; i < Smokes.length; i++) {
+        var s = Smokes[i];
+
+        // darker as it gets closer to 0
+        push();
+        fill(s.y);
+        translate(x, s.y);
+        rotate(r);
+        scale(s.sc);
+        rect(-10, -10, 20, 20);
+        pop();
+
+        // up 3 pixels
+        s.y -= s.spd;
+        // rotate 0.05 radians ~= 2.8 degrees per frame
+        r += 0.001;
+
+        if(s.y<300){
+          s.sc += s.scup;
+        }
+
+
+
+        // if reach past the top a bunch
+        if (s.y < -150) {
+          s.y = 290;
+          s.sc = 1;
+        }
+      }
+
+
+    }
+
+    </script>
+  </body>
+</html>

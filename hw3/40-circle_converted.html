@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+
+
+
+      function setup() {
+          createCanvas(400, 400);
+          for (var i = 0; i < 100; i++) {
+            append(circles,{
+              x: random(width),
+              y: random(height),
+              changeInX: random(-5,5),
+              changeInY: random(-5,5),
+              colors: random(0,360),
+              Dcolors: random(-1,1),
+            });
+
+          }
+          colorMode(HSB)
+        }
+        var circles = [];
+
+      function draw() {
+        background(220);
+        noStroke();
+        for (var i = 0; i < circles.length; i++) {
+          var c = circles[i];
+
+
+          fill(c.colors, c.colors, 100);
+          ellipse(c.x, c.y, 40);
+
+          c.x = c.x + c.changeInX;
+          c.y = c.y + c.changeInY;
+          c.colors = c.colors + c.Dcolors;
+
+
+          if (c.x > width || c.x < 0) {
+            c.changeInX = -c.changeInX;
+
+          }
+
+          if (c.y > height || c.y < 0) {
+            c.changeInY = -c.changeInY;
+
+          }
+          if(c.colors>361 || c.colors<0){
+            c.Dcolors = - c.Dcolors;
+          }
+        }
+
+      }
+
+    </script>
+  </body>
+</html>

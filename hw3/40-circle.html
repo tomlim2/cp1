@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+
+      var circles
+
+      function setup() {
+          createCanvas(400, 400);
+          for (var i = 0; i < 100; i++) {
+            append(x,random(width));
+            append(y,random(height));
+            append(changeInX,random(-5,5));
+            append(changeInY,random(-5,5));
+            append(colors, random(0,360));
+            append(Dcolors, random(-1,1));
+          }
+          colorMode(HSB)
+        }
+        var circles = []
+      var x = [50, 70];
+      var y = [200, 90];
+      var changeInX = [3, 2];
+      var changeInY = [3, 4];
+      var colors = [40, 90];
+      var Dcolors = [4, 9];
+
+      function draw() {
+        background(220);
+        noStroke();
+        for (var i = 0; i < x.length; i++) {
+          fill(colors[i], colors[i], 100);
+          ellipse(x[i], y[i], 40);
+
+          x[i] = x[i] + changeInX[i];
+          y[i] = y[i] + changeInY[i];
+          colors[i] = colors[i] + Dcolors[i];
+
+
+          if (x[i] > width || x[i] < 0) {
+            changeInX[i] = -changeInX[i];
+
+          }
+
+          if (y[i] > height || y[i] < 0) {
+            changeInY[i] = -changeInY[i];
+
+          }
+          if(colors[i]>361 || colors[i]<0){
+            Dcolors[i] = - Dcolors[i];
+          }
+        }
+
+      }
+
+    </script>
+  </body>
+</html>
