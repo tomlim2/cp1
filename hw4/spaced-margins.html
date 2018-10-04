@@ -5,6 +5,10 @@
     <title>Computational Practices I</title>
   </head>
   <style media="screen">
+  body{
+    margin: 0;
+    background: #DCD3B2;
+  }
   #defaultCanvas0{
     position: relative;
 
@@ -23,49 +27,22 @@
     <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
-
-
-
     function setup() {
       createCanvas(400, 400);
-      colorMode(HSB);
-      for (var t = 0; t < 40; t++) {
-        append(drips,{
-          x: 230,
-          y: random(220,800),
-          dy: 1
-
-        });
-      }
     }
-    var drips = [];
 
     function draw() {
-      background(0);
-      noStroke();
+      var cols1 = color(220,203,24);
+      var cols2 = color(67,103,107);
+      background(cols1);
 
-      // draw pipe
-      rect(0, 200, 230, 20);
-
-      // draw drip
-      for (var i = 0; i < drips.length; i++) {
-        var dp = drips[i];
-
-        ellipse(dp.x, dp.y, 10);
-        dp.dy = dp.dy + 9.8;
-        dp.y = dp.y + dp.dy/200;
-
-        // if invisible for a full “height” amount…
-        if (dp.y > height*2 && ! mouseIsPressed) {
-          // reset
-          dp.y = 220;
-          dp.dy = 0;
-        }
+      for (var x = 10; x < width-10; x = x + 30) {
+        push();
+        stroke(cols2)
+        line(x, height/2, mouseX, mouseY);
       }
-
-
-
     }
+
     </script>
   </body>
 </html>

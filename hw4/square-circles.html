@@ -17,6 +17,7 @@
   }
   body{
     margin: 0;
+    background: #D1DBBD;
   }
   </style>
   <body>
@@ -24,39 +25,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
     function setup() {
-        createCanvas(400, 400);
+      createCanvas(400, 400);
       }
 
-      var x = 10;
-      var y = 10;
-      var changeInX = 3;
-      var changeInY = 3;
+      var x = []; // new empty array
+      var y = []; // new empty array
 
       function draw() {
-        background(220);
+      background(255);
+      noFill();
 
-        ellipse(x, 200, 40);
+      x.push(mouseX); // equivalent to append(x, mouseX)
+      y.push(mouseY); // equivalent to append(y, mouseY)
 
-        x = x + changeInX;
-        y = y + changeInY;
-
-        if (x > width) {
-          changeInX = -3;
-        }
-
-        if (x < 0) {
-          changeInX = 3;
-        }
-
-        if (y > height) {
-          changeInY = -3;
-        }
-
-        if (y < 0) {
-          changeInY = 3;
-        }
+      for (var i = 0; i < x.length; i = i + 10) {
+        var width = 1 + (x.length - i);
+        rect(x[i] - width/2, y[i] -width/2, width, width);
+        ellipse(x[i], y[i], 100 + width);
       }
 
+      x = x.slice(-100); // keep the last 50 x values
+      y = y.slice(-100); // keep the last 50 y values
+      }
     </script>
   </body>
 </html>
