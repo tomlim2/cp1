@@ -52,8 +52,8 @@
         var dp = drips[i];
 
         ellipse(dp.x, dp.y, 10);
-        dp.dy = dp.dy + 9.8;
-        dp.y = dp.y + dp.dy/200;
+        dp.dy = dp.dy * 0.98 + 0.2;
+        dp.y = dp.y + dp.dy;
 
         // if invisible for a full “height” amount…
         if (dp.y > height*2 && ! mouseIsPressed) {
