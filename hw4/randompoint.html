@@ -29,16 +29,18 @@
     <script type="text/javascript">
     function setup() {
       createCanvas(400, 400);
-      colorMode(HSB);
+      colorMode(HSB, width, height, 100);
     }
 
-    function draw() {
-      background(color(78,7,100));
 
-      for (var x = 0; x < 360; x = x + 10) {
-        stroke(color(200,62,25))
-        line(sin(radians(x))*100+200, cos(radians(x))*100+200, mouseX, mouseY);
+    function draw() {
+      for (var i = 0; i < width; i = i + 40) {
+        for (var t = 0; t < height; t = t + 40) {
+          stroke(i,t,100)
+          point(random(i,i+40), random(t,t+40))
+        }
       }
+
     }
     </script>
   </body>
