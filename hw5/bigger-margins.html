@@ -7,7 +7,7 @@
   <style media="screen">
   body{
     margin: 0;
-    background: #D1DBBD;
+    background: #DCD3B2;
   }
   #defaultCanvas0{
     position: relative;
@@ -27,19 +27,40 @@
     <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
+    var headX = [3,3,3,3];
+    var headY = [2,3,4,5];
+    var snakeLength = 4;
+
+    var direction = 'right';
+
     function setup() {
       createCanvas(400, 400);
-      colorMode(HSB);
+      frameRate(1);
     }
-
+    var sgrid = 15;
     function draw() {
-      background(color(78,7,100));
-
-      for (var x = 0; x < 360; x = x + 10) {
-        stroke(color(200,62,25))
-        line(cos(radians(x))*100+200, sin(radians(x))*100+200, mouseX, mouseY);
+      background(220);
+      noStroke();
+      for (var i = 0; i < headX.length; i++) {
+        rect(headX[i]*sgrid, headY[i]*sgrid, sgrid,sgrid)
       }
+
+      if (direction == "right"){
+        var oldX = headX[0];
+        var oldY = headY[0];
+        var newX = oldX + 1;
+        var newY = oldY;
+        headX.unshift(newX);
+        headY.unshift(newY);
+
+        print(headX,headY);
+      }
+
+      headX = headX.slice(0,snakeLength)
+      headY = headY.slice(0,snakeLength)
+
     }
+
     </script>
   </body>
 </html>
