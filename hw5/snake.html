@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #DCD3B2;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    var headX = [3,3,3,3];
+    var headY = [2,3,4,5];
+    var snakeLength = 4;
+
+    var direction = 'right';
+
+    var foodX = 10;
+    var foodY = 10;
+
+    var direction = "right"
+
+    function setup() {
+      createCanvas(400, 400);
+      frameRate(10);
+    }
+
+    var sgrid = 15;
+    function draw() {
+      background(220);
+
+      var oldX = headX[0];
+      var oldY = headY[0];
+      var newX = oldX;
+      var newY = oldY;
+
+      if (direction == "right"){
+        newX = oldX + 1;
+      }
+      if (direction == "left"){
+        newX = oldX - 1;
+      }
+      if (direction == "down"){
+        newY = oldY + 1;
+      }
+      if (direction == "up"){
+        newY = oldY - 1;
+      }
+
+      headX.unshift(newX);
+      headY.unshift(newY);
+
+      headX = headX.slice(0,snakeLength)
+      headY = headY.slice(0,snakeLength)
+
+      if (headX[0] == foodX && headY[0] == foodY){
+        snakeLength = snakeLength + 1;
+        frameRate(frameRate()+1);
+        placeFood();
+      }
+      noStroke();
+      fill(255)
+      for (var i = 0; i < headX.length; i++) {
+        rect(headX[i] * sgrid, headY[i] * sgrid, sgrid, sgrid);
+      }
+
+      //draw food
+      fill(255,0,0);
+      rect(foodX * sgrid, foodY * sgrid, sgrid, sgrid);
+
+      // check for collision with snake
+      for (var i = 1; i < headX.length; i = i+1) {
+        if(headX[i] == headX[0] && headY[i] == headY[0]){
+          background(0, 90);
+          fill(255);
+          textSize(96);
+          text("GAME", width/2-textWidth("GAME")/2, height/2-25);
+          text("OVER", width/2-textWidth("OVER")/2, height/2+75);
+          noLoop();
+        }
+      }
+
+      // check for collision with edge
+      for (var i = 1; i < headX.length; i = i+1) {
+        if(headX[0] < 0  || headX[0] > width  || headY[0] < 0  || headY[0] > height){
+          background(0, 90);
+          fill(255);
+          textSize(96);
+          text("GAME", width/2-textWidth("GAME")/2, height/2-25);
+          text("OVER", width/2-textWidth("OVER")/2, height/2+75);
+          noLoop();
+        }
+      }
+    }
+
+    function placeFood(){
+      foodX = floor(random(width/sgrid));
+      foodY = floor(random(height/sgrid));
+
+      for (var i = 0; i < headX.length; i = i+1){
+        if(foodX == headX[i] && foodY == headY[i]){
+          return placeFood();
+        }
+      }
+    }
+
+    function keyPressed(){
+      if (keyCode == DOWN_ARROW){
+        direction = "down";
+      }
+      if (keyCode == UP_ARROW){
+        direction = "up";
+      }
+      if (keyCode == RIGHT_ARROW){
+        direction = "right";
+      }
+      if (keyCode == LEFT_ARROW){
+        direction = "left";
+      }
+    }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: 100px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    function setup() {
+      createCanvas(400, 400);
+    }
+    var ran1 = random(1,10)
+    function draw() {
+      background(226,48,81);
+
+      for (var x = 10; x <= 390; x = x + 40) {
+        for (var y = 10; y <= 390; y = y + 40) {
+          for (var z = 0; z <= 390; z = z + 40) {
+            rotate(29*PI/180);
+            stroke(255);
+            line(mouseY, mouseX, y+z+mouseX, x+mouseY);
+          }
+        }
+      }
+    }
+
+    </script>
+  </body>
+</html>
