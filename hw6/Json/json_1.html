@@ -14,8 +14,8 @@
 
     left: 50%;
     top: 50%;
-    margin-left: -200px;
-    margin-top: 100px;
+    margin-left: -360px;
+    margin-top: 0px;
 
 
   }
@@ -27,22 +27,23 @@
     <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script type="text/javascript">
-    function setup() {
-      createCanvas(400, 400);
-    }
+      var flower
 
-    function draw() {
-      background(255);
-
-      for (var i = 0; i <= 400; i = i + 10) {
-        stroke(226,48,81);
-        if(i<200){
-          line(200-i, i, 200+i, i);
-        }else{
-          line(i-200, i, 600-i, i);
-        }
+      function preload(){
+        flower = loadJSON("json/flower.json");
       }
-    }
+
+      function setup(){
+        createCanvas(400,400);
+
+      }
+
+
+      function draw(){
+        background(0);
+        fill(flower.r, flower.g, flower.b);
+        text(flower.name, 10, 50);
+      }
 
     </script>
   </body>

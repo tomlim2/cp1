@@ -33,15 +33,18 @@
 
     function draw() {
       background(255);
+      stroke(226,48,81);
+      noFill();
+      rectMode(RADIUS);
 
-
-      for (var i = 80; i <= 320; i = i + 60) {
-        for (var t = 0; t < 4; t++) {
-          stroke(226,48,81);
-          noFill();
-          rectMode(RADIUS);
-          rect(i, 200, t*6+4, t*6+4);
+      for (var i = 20; i <= mouseX; i = i + 60) {
+        //wait read this part
+        for (var z = 20; z <= mouseY; z = z + 60) {
+          for (var t = 0; t < 4; t++) {
+            rect(i, z, t*6+4, t*6+4);
+          }
         }
+
       }
     }
 

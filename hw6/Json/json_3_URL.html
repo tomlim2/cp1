@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+    <style media="screen">
+    body{
+      margin: 0;
+      background: #E23051;
+      color: black;
+    }
+    /* #defaultCanvas0{
+      position: relative;
+
+      left: 50%;
+      top: 50%;
+      margin-left: -360px;
+      margin-top: 0px;
+    } */
+    </style>
+  </head>
+
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+
+    <script type="text/javascript">
+      function setup(){
+        createCanvas(200,200);
+        loadJSON("http://api.open-notify.org/astros.json", gotData,"jsonp");
+
+      }
+
+      function gotData(data){
+        background(0);
+        for (var i = 0; i < data.number; i++) {
+          fill(255);
+          ellipse(random(200),random(200),16,16)
+        }
+
+      }
+
+    </script>
+    <!-- <script src="sketch.js"></script> -->
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+    <style media="screen">
+    body{
+      margin: 0;
+      background: #E23051;
+      color: black;
+    }
+    /* #defaultCanvas0{
+      position: relative;
+
+      left: 50%;
+      top: 50%;
+      margin-left: -360px;
+      margin-top: 0px;
+    } */
+    </style>
+  </head>
+
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="js/sketch.js"></script>
+    <script src="js/p5.dom.min.js"></script>
+    <script type="text/javascript">
+      var data
+
+      function preload(){
+        data = loadJSON("json/birds.json");
+      }
+
+      function setup(){
+        noCanvas();
+        // createCanvas(400,400);
+        // var bird = data.birds[1].members[2];
+
+        var birds = data.birds;
+        for (var i = 0; i < birds.length; i++) {
+          createElement('h1', birds[i].family);
+          var members =birds[i].members;
+          for (var j = 0; j < members.length; j++) {
+            createDiv(members[j]);
+          }
+        }
+      }
+
+    </script>
+
+  </body>
+</html>

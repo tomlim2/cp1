@@ -33,15 +33,23 @@
 
     function draw() {
       background(255);
+      stroke(226,48,81);
 
-      for (var i = 0; i <= 400; i = i + 10) {
-        stroke(226,48,81);
-        if(i<200){
-          line(200-i, i, 200+i, i);
-        }else{
-          line(i-200, i, 600-i, i);
-        }
+      var startX = 195;
+      var endX = 205;
+
+      for (var i = 10; i <= 200; i = i + 10) {
+        line(startX, i, endX, i);
+        startX = startX - 10;
+        endX = endX + 10;
       }
+
+      for (var i = 200; i <= 400; i = i + 10) {
+        line(startX, i, endX, i);
+        startX = startX + 10;
+        endX = endX - 10;
+      }
+
     }
 
     </script>

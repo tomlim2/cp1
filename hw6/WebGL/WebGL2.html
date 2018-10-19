@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -360px;
+    margin-top: 0px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+      function setup(){
+        createCanvas(720,720,WEBGL);
+      }
+      var angle = 0;
+      var sqs = 20;
+
+      function draw(){
+        let dx = mouseX - width/2;
+        let dy = mouseY - height/2;
+        let v = createVector(dx, dy, 0);
+        let nv = createVector(-dx, -dy, 0);
+        v.normalize();
+        nv.normalize();
+
+        background(150);
+        rectMode(CENTER);
+        noStroke();
+
+        rotateX(angle*0.1)
+        rotateY(angle*0.1)
+        // normalMaterial();
+
+        directionalLight(0, 0, 255, v);
+        directionalLight(255, 0, 0, nv);
+
+        specularMaterial(255);
+        box(60,60,180)
+        ambientMaterial(255);
+        torus(100,40)
+        angle += .1
+        // for (var x = -25; x < 25; x = x+2) {
+        //
+        //   for (var y = -25; y < 25; y= y+2) {
+        //     translate(x,y,0)
+        //
+        //
+        //
+        //
+        //
+        //   }
+        //
+        // }
+
+
+      }
+
+    </script>
+  </body>
+</html>

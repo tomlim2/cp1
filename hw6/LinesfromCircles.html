@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -500px;
+    margin-top: 0px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    let circles = [];
+
+const n = 500;
+
+function setup() {
+  createCanvas(1000, 750);
+	colorMode(HSB);
+  background(255);
+	for (let i = 0; i < n; i++) {
+		circles.push({
+      x: (i/n)*width,
+      y: 2*height/3,
+      vx: random(-0.5, 0.5),
+      vy: random(-2, 1)
+    });
+	}
+}
+
+const d = 30;
+
+function draw() {
+  // HSB: fully orange (hue of 30, sat & bri at 100%), 0.03 opacity
+  stroke(30, 100, 100, 0.03);
+
+	for (let i = 0; i < circles.length; i++) {
+    // for each circle
+    let from = circles[i];
+		for (let j = i+1; j < circles.length; j++) {
+      let to = circles[j];
+			if (dist(from.x, from.y, to.x, to.y) < d) {
+				line(from.x, from.y, to.x, to.y);
+			}
+		}
+    move(from);
+	}
+}
+
+function move(circle) {
+  circle.x += circle.vx;
+  circle.y += circle.vy;
+
+  if (circle.x < -d || circle.y < -d || circle.x > width+d || circle.y > height+d) {
+    circles.splice(circles.indexOf(circle), 1);
+  }
+}
+
+
+    </script>
+  </body>
+</html>
