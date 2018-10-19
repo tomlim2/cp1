@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: 100px;
+
+
+  }
+
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script type="text/javascript">
+    var mySound;
+
+    function preload() {
+      soundFormats('m4a', 'ogg');
+      mySound = loadSound('glockenspiel.m4a');
+    }
+
+    var x;
+    var y;
+    var vx = 3;
+    var vy = 2;
+    var r = 5;
+
+    function setup() {
+      createCanvas(400, 400);
+      x = random(r, width-r);
+      y = random(r, height-r);
+    }
+
+    function draw() {
+      background(220);
+      fill(255);
+      ellipse(x, y, 10);
+      x += vx;
+      y += vy;
+
+      if (x < r || x > width-r) {
+        vx = -vx;
+        mySound.rate(random(1,2));
+    		mySound.play();
+      }
+      if (y < r || y > height-r) {
+        vy = -vy;
+        mySound.rate(random(1,2));
+    		mySound.play();
+      }
+    }
+
+    </script>
+  </body>
+</html>

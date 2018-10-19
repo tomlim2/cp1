@@ -73,7 +73,7 @@ function draw() {
   for (var i = 0; i < circles.length; i++ ) {
     let circle = circles[i];
     noStroke();
-    ellipse(circle.x + random(2), circle.y+random(2), 50);
+    ellipse(circle.x, circle.y, 50);
     if (circle.targetX) {
 	    circle.x = 0.9 * circle.x + 0.1*circle.targetX;
     }

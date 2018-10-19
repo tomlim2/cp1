@@ -7,7 +7,7 @@
   <style media="screen">
   body{
     margin: 0;
-    background: #E23051;
+    background: #F1F0E2;
   }
   #defaultCanvas0{
     position: relative;
@@ -27,43 +27,81 @@
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
     <script type="text/javascript">
-    var chime;
+    var x3;
+    var y3;
+    var vx3 = 3;
+    var vy3 = -2;
+    var r3 = 12;
 
-    var sounds = [];
-    var circles = [];
+    var dr4 = 2;
+    var r4 = 100;
 
     function preload() {
-      soundFormats('m4a');
-      for (var i = 0; i < 10; i++) {
-        sounds.push(loadSound('glockenspiel.m4a'));
-      }
     }
 
     function setup() {
       createCanvas(400, 400);
-      background(255,255,248);
-      for (var i = 0; i < sounds.length; i++) {
-        let r = round(random(10, 30));
-        let sound = sounds[i];
-        sound.rate(0.25*pow(2, (30-r)/12));
-
-        circles.push({
-          r: r,
-          pos: createVector(random(r*2, width - r*2), random(r*2, height - r*2)),
-          vel: createVector(random(-.3, .3), random(-.3, .3)),
-          chime: sound
-        });
-      }
+      x3 = random (200+r3*2, width - r3*2);
+      y3 = random (r3*2, 200 - r3*2);
     }
 
     function draw() {
+      colorMode(HSB);
+      var col1 = color(194, 20, 95);
+      var col2 = color(56, 6, 95);
+      var col3 = color(34, 32, 85);
+      var col4 = color(1, 66, 82);
+      var col5 = color(204, 30, 35);
 
+      background(255,255,248);
       noStroke();
+//section1
+      pulse1 = map(cos(radians(dr4*.1)),-1,1,0,200);
+      pulse2 = map(sin(radians(dr4*.1)),-1,1,0,200);
 
-      if (random()>0.99){
-        fill(33,190,218);
-        ellipse(random(width),random(height),random(1,30));
+      fill(col4);
+      rect(0,0,200,100);
+
+      fill(col5);
+      rect(0,0,pulse1,50);
+      rect(0,50,pulse2,100);
+//section2
+      fill(col1);
+      rect(0,100,200,300);
+//section3
+      fill(col3);
+      rect(200,0,200,200);
+
+      fill(col2);
+      ellipse(x3, y3, r3*2);
+      x3 += vx3;
+      y3 += vy3;
+
+      if (x3-200 < r3 || x3 > width-r3) {
+        vx3 = -vx3;
       }
+      if (y3 < r3 || y3 > 200-r3) {
+        vy3 = -vy3;
+      }
+//section4
+      fill(col5);
+      rect(200,200,200,200);
+
+
+
+      pulse3 = 180+map(cos(radians(dr4)),-1,1,0,5);
+      dr4 = dr4+10;
+
+      fill(col4);
+      ellipse(300, 300, pulse3);
+
+      // fill(col5);
+      // ellipse(300, 300, pulse2);
+      //
+      // fill(col4);
+      // ellipse(300, 300, 20+mouseX/2+pulse3);
+
+
     }
 
     </script>
