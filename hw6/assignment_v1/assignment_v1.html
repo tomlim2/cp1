@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: 100px;
+
+
+  }
+
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../../index.html">Home</a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script type="text/javascript">
+    var chime;
+
+    var sounds = [];
+    var circles = [];
+
+    function preload() {
+      soundFormats('m4a');
+      for (var i = 0; i < 10; i++) {
+        sounds.push(loadSound('glockenspiel.m4a'));
+      }
+    }
+
+    function setup() {
+      createCanvas(400, 400);
+      background(255,255,248);
+      for (var i = 0; i < sounds.length; i++) {
+        let r = round(random(10, 30));
+        let sound = sounds[i];
+        sound.rate(0.25*pow(2, (30-r)/12));
+
+        circles.push({
+          r: r,
+          pos: createVector(random(r*2, width - r*2), random(r*2, height - r*2)),
+          vel: createVector(random(-.3, .3), random(-.3, .3)),
+          chime: sound
+        });
+      }
+    }
+
+    function draw() {
+
+      noStroke();
+
+      if (random()>0.99){
+        fill(33,190,218);
+        ellipse(random(width),random(height),random(1,30));
+      }
+    }
+
+    </script>
+  </body>
+</html>
