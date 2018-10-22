@@ -27,6 +27,9 @@
     <script src="p5.dom.min.js"></script>
     <script src="p5.sound.min.js"></script>
     <script type="text/javascript">
+
+    var mySound;
+    var pulse1;
     var x3;
     var y3;
     var vx3 = 3;
@@ -36,18 +39,24 @@
     var dr4 = 2;
     var r4 = 100;
 
-    function preload() {
-    }
-
     function setup() {
-      createCanvas(400, 400);
+      createCanvas(400, 400,WEBGL);
       x3 = random (200+r3*2, width - r3*2);
       y3 = random (r3*2, 200 - r3*2);
     }
 
+
+
+    function preload() {
+      soundFormats('m4a', 'ogg');
+      mySound = loadSound('glockenspiel.m4a');
+    }
+
+
     function draw() {
       colorMode(HSB);
-      var col1 = color(194, 20, 95);
+      // var col1 = color(194, 20, 95);
+      var col1 = color(map(mouseX,0,400,0,360), map(mouseY,0,400,0,20), 95);
       var col2 = color(56, 6, 95);
       var col3 = color(34, 32, 85);
       var col4 = color(1, 66, 82);
@@ -55,19 +64,26 @@
 
       background(255,255,248);
       noStroke();
-//section1
-      pulse1 = map(cos(radians(dr4*.1)),-1,1,0,200);
-      pulse2 = map(sin(radians(dr4*.1)),-1,1,0,200);
 
+
+      push();
+      translate(-width/2,-width/2);
+//section1
       fill(col4);
       rect(0,0,200,100);
 
-      fill(col5);
-      rect(0,0,pulse1,50);
-      rect(0,50,pulse2,100);
+
+      for (var i = 0; i < 4; i++) {
+        pulse1 = map(cos(radians(frameCount*.3*(i+1))),-1,1,0,200);
+        sqw = 25
+        fill(col5);
+        rect(0,sqw*i,pulse1,sqw);
+      }
+
 //section2
       fill(col1);
       rect(0,100,200,300);
+
 //section3
       fill(col3);
       rect(200,0,200,200);
@@ -79,21 +95,22 @@
 
       if (x3-200 < r3 || x3 > width-r3) {
         vx3 = -vx3;
+        mySound.play();
       }
       if (y3 < r3 || y3 > 200-r3) {
         vy3 = -vy3;
+        mySound.play();
       }
 //section4
       fill(col5);
       rect(200,200,200,200);
 
-
-
       pulse3 = 180+map(cos(radians(dr4)),-1,1,0,5);
-      dr4 = dr4+10;
+      dr4 = dr4+11;
 
       fill(col4);
       ellipse(300, 300, pulse3);
+
 
       // fill(col5);
       // ellipse(300, 300, pulse2);
@@ -102,6 +119,28 @@
       // ellipse(300, 300, 20+mouseX/2+pulse3);
 
 
+
+      //3D model
+      let dx = mouseX - 100;
+      let dy = mouseY - 300;
+      let v = createVector(dx, dy, dy-dx);
+      let nv = createVector(-dx, -dy, -dy+dx);
+      v.normalize();
+      nv.normalize();
+
+      directionalLight(56, 6, 95, 1,1,-1);
+      directionalLight(34, 32, 85, -1,-1,-1);
+
+
+      push();
+      translate(130,240,100);
+      rotateX(-mouseY*0.01)
+      rotateY(-mouseX*0.01)
+      ambientMaterial(0,0,100);
+      box(60,130,60)
+
+      pop();
+      //3D model end
     }
 
     </script>

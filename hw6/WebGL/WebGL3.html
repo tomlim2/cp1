@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Computational Practices I</title>
+  </head>
+  <style media="screen">
+  body{
+    margin: 0;
+    background: #E23051;
+  }
+  #defaultCanvas0{
+    position: relative;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -360px;
+    margin-top: 0px;
+
+
+  }
+  body{
+    margin: 0;
+  }
+  </style>
+  <body>
+    <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../index.html">Home</a></div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
+    <script src="p5.min.js"></script>
+    <script type="text/javascript">
+      function setup(){
+        createCanvas(720,720,WEBGL);
+      }
+      var angle = 0;
+      var sqs = 15;
+
+      function draw(){
+        let dx = mouseX - width/2;
+        let dy = mouseY - height/2;
+        let v = createVector(dx, dy, 0);
+        let nv = createVector(-dx, -dy, 0);
+        v.normalize();
+        nv.normalize();
+
+        background(150);
+        rectMode(CENTER);
+        noStroke();
+
+        directionalLight(0, 0, 255, v);
+        directionalLight(255, 0, 0, nv);
+
+        for (var x = -20; x < 20; x=x+5) {
+          for (var y = -20; y < 20; y=y+5) {
+            for (var z = -20; z < 20; z=z+5) {
+              push();
+              translate(x*sqs,y*sqs,z*sqs);
+              rotateX(-mouseY*0.01)
+              rotateY(-mouseX*0.01)
+              ambientMaterial(255);
+              box(sqs,sqs,sqs)
+              pop();
+            }
+          }
+        }
+
+
+      }
+
+    </script>
+  </body>
+</html>
