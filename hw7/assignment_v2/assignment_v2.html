@@ -29,6 +29,8 @@
     <script type="text/javascript">
 
     var mySound;
+    var myHeartOut;
+    var myHeartIn;
     var pulse1;
     var x3;
     var y3;
@@ -48,8 +50,10 @@
 
 
     function preload() {
-      soundFormats('m4a', 'ogg');
-      mySound = loadSound('glockenspiel.m4a');
+      soundFormats('wav', 'ogg');
+      mySound = loadSound('vox_duck_land_01_v2.wav');
+      myHeartIn = loadSound('gpe_foo_heart_bounce_in_01_v2.wav');
+      myHeartOut = loadSound('gpe_foo_heart_bounce_out_v2.wav');
     }
 
 
@@ -95,21 +99,29 @@
 
       if (x3-200 < r3 || x3 > width-r3) {
         vx3 = -vx3;
+        mySound.rate(random(0.5,1.5));
         mySound.play();
       }
       if (y3 < r3 || y3 > 200-r3) {
         vy3 = -vy3;
+        mySound.rate(random(0.5,1.5));
         mySound.play();
       }
 //section4
       fill(col5);
       rect(200,200,200,200);
 
-      pulse3 = 180+map(cos(radians(dr4)),-1,1,0,5);
-      dr4 = dr4+11;
+      pulse3 = 180+map(cos(radians(dr4)),-1,1,-5,5);
+      dr4 = dr4+5;
 
       fill(col4);
       ellipse(300, 300, pulse3);
+      if(pulse3 >= 184.99){
+        myHeartIn.play();
+      }
+      if(pulse3 <= 175.02){
+        myHeartOut.play();
+      }
 
 
       // fill(col5);
