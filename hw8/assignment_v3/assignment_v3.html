@@ -269,27 +269,32 @@
       //   warnr.shift();
       // }
       //
-      // for (var i = 0; i < sparkles.length; i = i + 1) {
-      //   var sparkle = sparkles[i];
-      //
-      //   fill(sparkle.h, 100, 120-sparkle.frames/2);
-      //   ellipse(sparkle.x, sparkle.y, sparkle.diameter);
-      //
-      //   sparkle.x = sparkle.x + sparkle.vx;
-      //   sparkle.y = sparkle.y + sparkle.vy;
-      //
-      //   // add a little friction & gravity
-      //   sparkle.vx = sparkle.vx * 0.99;
-      //   sparkle.vy = sparkle.vy * 0.99 + 0.2;
-      //
-      //   // count how many frames the sparkle has been visible
-      //   sparkle.frames = sparkle.frames + 1;
-      // }
-      //
-      // // remove any sparkles older than 240 frames
-      // while (sparkles.length > 0 && sparkles[0].frames > 240) {
-      //   sparkles.shift();
-      // }
+      for (var i = 0; i < sparkles.length; i = i + 1) {
+
+        var sparkle = sparkles[i];
+        push();
+
+        translate(sparkle.x,sparkle.y,200);
+        ambientMaterial(dcol6,20,100);
+        box(sparkle.w)
+
+
+        sparkle.x = sparkle.x + sparkle.vx;
+        sparkle.y = sparkle.y + sparkle.vy;
+
+        // add a little friction & gravity
+        sparkle.vx = sparkle.vx * 0.99;
+        sparkle.vy = sparkle.vy * 0.99 + 0.2;
+
+        // count how many frames the sparkle has been visible
+        sparkle.frames = sparkle.frames + 1;
+        pop();
+      }
+
+      // remove any sparkles older than 240 frames
+      while (sparkles.length > 0 && sparkles[0].frames > 240) {
+        sparkles.shift();
+      }
 
     }
 
@@ -330,20 +335,20 @@
       //     });
       // }
 
-      // for (var i = 0; i < 30; i = i + 1) {
-      //   var angle = random(TWO_PI);
-      //   var distance = random(1.5,2);
-      //
-      //   sparkles.push({
-      //     h: random(360),
-      //     x: mouseX,
-      //     y: mouseY,
-      //     vx: distance * sin(angle),
-      //     vy: distance * cos(angle),
-      //     frames: 0,
-      //     diameter:random(3,20)
-      //   });
-      // }
+      for (var i = 0; i < 1; i = i + 1) {
+        var angle = random(TWO_PI);
+        var distance = random(1.5,2);
+
+        sparkles.push({
+          w: random(100,180),
+          h: random(100,180),
+          x: mouseX,
+          y: mouseY,
+          vx: distance * sin(angle),
+          vy: distance * cos(angle),
+          frames: 0,
+        });
+      }
 
     }
 
