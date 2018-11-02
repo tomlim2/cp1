@@ -1,0 +1,111 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 Last login: Mon Oct 22 22:24:58 on console\
+TomLims-Macbook:~ tomlim$ ifconfig\
+lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 16384\
+	options=1203<RXCSUM,TXCSUM,TXSTATUS,SW_TIMESTAMP>\
+	inet 127.0.0.1 netmask 0xff000000 \
+	inet6 ::1 prefixlen 128 \
+	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1 \
+	nd6 options=201<PERFORMNUD,DAD>\
+gif0: flags=8010<POINTOPOINT,MULTICAST> mtu 1280\
+stf0: flags=0<> mtu 1280\
+XHC0: flags=0<> mtu 0\
+XHC1: flags=0<> mtu 0\
+XHC20: flags=0<> mtu 0\
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500\
+	ether f4:0f:24:3c:3c:2c \
+	inet6 fe80::13:cb45:accc:1a1%en0 prefixlen 64 secured scopeid 0x8 \
+	inet 10.28.16.124 netmask 0xfffff800 broadcast 10.28.23.255\
+	nd6 options=201<PERFORMNUD,DAD>\
+	media: autoselect\
+	status: active\
+p2p0: flags=8843<UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST> mtu 2304\
+	ether 06:0f:24:3c:3c:2c \
+	media: autoselect\
+	status: inactive\
+awdl0: flags=8943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1484\
+	ether f2:03:a0:42:50:db \
+	inet6 fe80::f003:a0ff:fe42:50db%awdl0 prefixlen 64 scopeid 0xa \
+	nd6 options=201<PERFORMNUD,DAD>\
+	media: autoselect\
+	status: active\
+en3: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500\
+	options=60<TSO4,TSO6>\
+	ether b6:00:5d:20:0e:01 \
+	media: autoselect <full-duplex>\
+	status: inactive\
+en1: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500\
+	options=60<TSO4,TSO6>\
+	ether b6:00:5d:20:0e:00 \
+	media: autoselect <full-duplex>\
+	status: inactive\
+en4: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500\
+	options=60<TSO4,TSO6>\
+	ether b6:00:5d:20:0e:05 \
+	media: autoselect <full-duplex>\
+	status: inactive\
+en2: flags=8963<UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500\
+	options=60<TSO4,TSO6>\
+	ether b6:00:5d:20:0e:04 \
+	media: autoselect <full-duplex>\
+	status: inactive\
+bridge0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500\
+	options=63<RXCSUM,TXCSUM,TSO4,TSO6>\
+	ether b6:00:5d:20:0e:00 \
+	Configuration:\
+		id 0:0:0:0:0:0 priority 0 hellotime 0 fwddelay 0\
+		maxage 0 holdcnt 0 proto stp maxaddr 100 timeout 1200\
+		root id 0:0:0:0:0:0 priority 0 ifcost 0 port 0\
+		ipfilter disabled flags 0x2\
+	member: en1 flags=3<LEARNING,DISCOVER>\
+	        ifmaxaddr 0 port 12 priority 0 path cost 0\
+	member: en2 flags=3<LEARNING,DISCOVER>\
+	        ifmaxaddr 0 port 14 priority 0 path cost 0\
+	member: en3 flags=3<LEARNING,DISCOVER>\
+	        ifmaxaddr 0 port 11 priority 0 path cost 0\
+	member: en4 flags=3<LEARNING,DISCOVER>\
+	        ifmaxaddr 0 port 13 priority 0 path cost 0\
+	nd6 options=201<PERFORMNUD,DAD>\
+	media: <unknown type>\
+	status: inactive\
+utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000\
+	inet6 fe80::a8a5:be35:dc71:ae70%utun0 prefixlen 64 scopeid 0x10 \
+	nd6 options=201<PERFORMNUD,DAD>\
+utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380\
+	inet6 fe80::7438:2634:c643:7241%utun1 prefixlen 64 scopeid 0x11 \
+	nd6 options=201<PERFORMNUD,DAD>\
+utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380\
+	inet6 fe80::d039:d3b0:68e9:7f9c%utun2 prefixlen 64 scopeid 0x12 \
+	nd6 options=201<PERFORMNUD,DAD>\
+utun3: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380\
+	inet6 fe80::5bc3:e6cf:1903:b54b%utun3 prefixlen 64 scopeid 0x16 \
+	nd6 options=201<PERFORMNUD,DAD>\
+en5: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500\
+	ether ac:de:48:00:11:22 \
+	inet6 fe80::aede:48ff:fe00:1122%en5 prefixlen 64 scopeid 0x7 \
+	nd6 options=201<PERFORMNUD,DAD>\
+	media: autoselect\
+	status: active\
+TomLims-Macbook:~ tomlim$ nc -1 8003\
+nc: invalid option -- 1\
+usage: nc [-46AacCDdEFhklMnOortUuvz] [-K tc] [-b boundif] [-i interval] [-p source_port] [--apple-delegate-pid pid] [--apple-delegate-uuid uuid]\
+	  [-s source_ip_address] [-w timeout] [-X proxy_version]\
+	  [-x proxy_address[:port]] [hostname] [port[s]]\
+TomLims-Macbook:~ tomlim$ nc -1 8003\
+nc: invalid option -- 1\
+usage: nc [-46AacCDdEFhklMnOortUuvz] [-K tc] [-b boundif] [-i interval] [-p source_port] [--apple-delegate-pid pid] [--apple-delegate-uuid uuid]\
+	  [-s source_ip_address] [-w timeout] [-X proxy_version]\
+	  [-x proxy_address[:port]] [hostname] [port[s]]\
+TomLims-Macbook:~ tomlim$ nc -l 8003\
+jjcsbh\
+yay\
+wow\
+\
+^C\
+}
