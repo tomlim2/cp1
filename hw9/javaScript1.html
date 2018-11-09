@@ -1,0 +1,85 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <title>Text Generator</title>
+  <style media="screen">
+    .purple{
+        color: purple;
+    }
+    .blueable{
+      cursor: pointer;
+    }
+    .blue{
+        color: blue;
+    }
+    .focus1{
+        color: blue;
+    }
+    .red{
+        color: red;
+    }
+    .focus1{
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="purpleable">
+    glitch there
+  </div>
+  <div class="blueable">
+    glitch there
+  </div>
+  <input class="yellowable">
+
+
+  </div>
+  <div class="focus1">
+    Yellow!
+  </div>
+  <div class="redable">
+    glitch there
+  </div>
+  <script type="text/javascript">
+    // var headerElement = $('#main-header')
+    //
+    // doSomething(headerElement);
+    // headerElement.toggleClass('purple')
+    //
+    // doThreeThings();
+    // function doThreeThings() {
+    //   doOneThing(12);
+    //   doAnotherThing(13);
+    //   doOneMoreThing("blah");
+    // }
+
+    function togglePurpleClass() {
+      $('.purpleable').toggleClass('purple');
+      setTimeout(togglePurpleClass, 200);
+    }
+    setTimeout(togglePurpleClass, 200);
+
+    function toggleBlueClass() {
+      $('.blueable').toggleClass('blue');
+    }
+    function toggleRedClass() {
+      $('.redable').toggleClass('red');
+    }
+
+    function setup() {
+      $('.blueable').on('click', toggleBlueClass);
+      $('.redable').on('mouseover', toggleRedClass);
+    }
+
+    $(setup);
+
+    $(document).ready(function(){
+      $(".yellowable").focus(function(){
+          $(".focus1").css("display", "inline").fadeOut(2000);
+      });
+    });
+
+  </script>
+</body>
+</html>

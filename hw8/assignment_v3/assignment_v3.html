@@ -103,8 +103,8 @@
 
 
 
-    var warnrs = [];
-    var sparkles = [];
+
+    var cubes = [];
 
     function draw() {
       colorMode(HSB);
@@ -269,9 +269,9 @@
       //   warnr.shift();
       // }
       //
-      for (var i = 0; i < sparkles.length; i = i + 1) {
+      for (var i = 0; i < cubes.length; i = i + 1) {
 
-        var sparkle = sparkles[i];
+        var sparkle = cubes[i];
         push();
 
         translate(sparkle.x,sparkle.y,200);
@@ -292,7 +292,7 @@
       }
 
       // remove any sparkles older than 240 frames
-      while (sparkles.length > 0 && sparkles[0].frames > 240) {
+      while (cubes.length > 0 && cubes[0].frames > 240) {
         sparkles.shift();
       }
 
@@ -339,7 +339,7 @@
         var angle = random(TWO_PI);
         var distance = random(1.5,2);
 
-        sparkles.push({
+        cubes.push({
           w: random(100,180),
           h: random(100,180),
           x: mouseX,

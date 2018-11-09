@@ -1,0 +1,33 @@
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <title>Text Generator</title>
+  <style media="screen">
+  .purpleable{
+    position: absolute;
+    transition: .1s all
+
+  }
+  </style>
+</head>
+
+<body>
+  <button class="purpleable">
+
+  </button>
+
+  <script type="text/javascript">
+    $('.purpleable').html("Click me!")
+    function moveButton() {
+      $('.purpleable').css({ left: 300*Math.random(), top: 300*Math.random() });
+    }
+
+    function setup() {
+      $('.purpleable').on('mouseover', moveButton);
+    }
+
+    $(setup);
+
+  </script>
+</body>
+</html>
