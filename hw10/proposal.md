@@ -1,5 +1,5 @@
 Your Project Title Here
-  Environment Sphere.
+  Environment Sphere
 
 
 Summary
@@ -27,10 +27,10 @@ Component Parts
 
 
 
-  Challenges
-    Finding and importing trust-worth API data
-    Ways to move vertexes using vector.
-    How to animate those move.
+Challenges
+  Finding and importing trust-worth API data
+  Ways to move vertexes using vector.
+  How to animate those move.
 
 
 Timeline
@@ -46,7 +46,7 @@ Completed Work
 
 
 References and links
-  Final look will look like this
+  Final look would look like this
   https://www.deviantart.com/starshelx/art/Abstract-Spikes-213158849
 
   WebGL and Data Visualisation
