@@ -4,12 +4,16 @@ Your Project Title Here
   Environment Sphere
 
 
+------------
 
 
 Summary
 
 
   Environment changes slow, but steady. This point makes people easy to ignore the change happening right now. The purpose of this abstract data visualization of geometric changes, and climate changes is for showing data changes of earth to draw people’s attention to think earth environment. I want to show data every year or months to show that data change of this earth.
+
+
+------------
 
 
 Component Parts
@@ -57,6 +61,7 @@ Component Parts
     Website (full screen)
 
 
+------------
 
 
 Challenges
@@ -72,6 +77,7 @@ Challenges
   How to animate those move.
 
 
+------------
 
 
 Timeline
@@ -92,6 +98,7 @@ Timeline
   Week 5: Present!
 
 
+------------
 
 
 Completed Work
@@ -100,7 +107,7 @@ Completed Work
   Website?
 
 
-
+------------
 
 
 References and links
