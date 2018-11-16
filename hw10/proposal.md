@@ -46,5 +46,8 @@ Completed Work
 
 
 References and links
+  Final look will look like this
+  https://www.deviantart.com/starshelx/art/Abstract-Spikes-213158849
+
   WebGL and Data Visualisation
   https://blogg.bekk.no/webgl-and-data-visualisation-379d8252ea51
