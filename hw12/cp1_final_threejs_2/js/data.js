@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   $.ajax({
       type: "GET",
       url: "csv/extreme_data.csv",

@@ -10,11 +10,11 @@ class Sphere{
   render(){
     rig2 = new THREE.Object3D();
     scene.add(rig2);
-
     //m
     for (let i = 0; i < 10; i++) {
       let geometry = new THREE.SphereGeometry( 5, 30, 30 );
-      let material = new THREE.MeshPhongMaterial({color:0xf0f0f0});
+      let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
+      // let material = new THREE.MeshDepthMaterial({wireframe:true, wireframeLinewidth: 10 });
       rig1 = new THREE.Object3D();
       rig2.add(rig1);
       rig1.rotation.y = 360/10*Math.PI/180*i;
@@ -32,16 +32,6 @@ class Sphere{
         vertices.addVectors(vertices, scnmvc);
         console.log(sample)
       }
-
-      var moonDiv = document.createElement( 'div' );
-      moonDiv.className = 'label';
-      moonDiv.textContent = 'Moon';
-      moonDiv.style.marginTop = '-1em';
-      moonDiv.style.color = 'white';
-      var moonLabel = new THREE.CSS2DObject( moonDiv );
-      moonLabel.position.set( 0, 10, 0 );
-      sphere.add( moonLabel );
-
       rig1.add(sphere);
     }
 }
@@ -51,9 +41,8 @@ class Sphere{
     // sphere.rotation.y += .005;
     rig2.children.forEach(function(child,index){
       child.children.forEach(function(child,index){
-          child.rotation.y += .01 * Math.random()
+          child.rotation.y += .003;
       })
-
     })
 
 
@@ -87,12 +76,6 @@ function init(){
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
 
-  labelRenderer = new THREE.CSS2DRenderer();
-  labelRenderer.setSize( window.innerWidth, window.innerHeight );
-  labelRenderer.domElement.style.position = 'absolute';
-  labelRenderer.domElement.style.top = 0;
-  document.body.appendChild( labelRenderer.domElement );
-
   window.addEventListener('resize', onWindowResize, false);
 
   document.addEventListener('mousedown',onDocumentMouseDown,false);
@@ -115,23 +98,26 @@ function fillScene(){
   scene.add(camera);
 
   var spotlight = new THREE.SpotLight(0xff0000, 0.9);
-  spotlight.position.set( 3, 6, 3);
+  spotlight.position.set( 3, -5, 70);
   spotlight.target.position.set( 0,0,0 );
   spotlight.castShadow = true;
-  spotlight.angle = 120*Math.PI/180;
+  spotlight.angle = 140*Math.PI/180;
   spotlight.penumbra = 0.2;
+  spotlight.distance = 100;
   scene.add( spotlight );
 
   var spotlight = new THREE.SpotLight(0x00ff00, 0.9);
-  spotlight.position.set( -3, -6, 3);
+  spotlight.position.set( -3, 5, 70);
   spotlight.target.position.set( 0,0,0 );
   spotlight.castShadow = true;
-  spotlight.angle = 120*Math.PI/180;
+  spotlight.angle = 140*Math.PI/180;
   spotlight.penumbra = 0.2;
+  spotlight.distance = 100;
   scene.add( spotlight );
 
-  var light = new THREE.HemisphereLight( 0xbbffff, 0xffbbbb, .5 );
+  var light = new THREE.HemisphereLight( 0xffbbff, 0xffffbb, .3 );
   scene.add( light );
+
 
   spheres.push(new Sphere(0,0,0));
   spheres[0].render();
@@ -165,7 +151,8 @@ function onDocumentMouseDown(event){
 
 function onDocumentMouseMove(event){
   mouseX = event.clientX - windowHalfX;
-  targetRotation = targetRotationOnMouseDown + (mouseX - mouseXOnMouseDown)* 0.001;
+  mouseY = event.clientY - windowHalfY;
+  targetRotation = targetRotationOnMouseDown + (mouseY + mouseX - mouseXOnMouseDown)* 0.001;
 }
 
 function onDocumentMouseUp(event){
@@ -204,5 +191,4 @@ function animate(){
 function render(){
   spheres[0].update();
   renderer.render(scene, camera);
-  labelRenderer.render( scene, camera );
 }
