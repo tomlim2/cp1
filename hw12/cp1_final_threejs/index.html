@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Something is happening</title>
+    <style media="screen">
+      body{
+        margin: 0;
+        overflow: hidden;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="build/three.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "csv/extreme_data.csv",
+          dataType: "text",
+          success: function(data) {processData(data);}
+       });
+    });
+
+    function processData(allText) {
+      var allTextLines = allText.split(/\r\n|\n/);
+      var headers = allTextLines[1].split(',');
+      var lines = [];
+
+      for (var i=2; i<allTextLines.length; i++) {
+          var data = allTextLines[i].split(',');
+          if (data.length == headers.length) {
+
+              var tarr = [];
+              for (var j=0; j<headers.length; j++) {
+                  tarr.push(data[j]);
+              }
+              lines.push(tarr);
+              // console.log(tarr);
+          }
+      }
+      for (var i = 0; i < lines.length; i++) {
+        datapack.push(lines[i][1])
+      }
+      console.log(datapack);
+
+    }
+
+    class Spheres{
+      constructor(){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.r = r;
+        this.deg = deg;
+        this.num = num;
+      }
+
+      show(){
+        let geometry = new THREE.SphereGeometry(5,10,10);
+        let material = new THREE.MeshPhongMaterial({color:0xff81ff});
+        sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+      }
+
+    }
+
+    let datapack = [];
+
+    let container;
+    let camera, scene, light, renderer, cube;
+    let spheres = [];
+
+    init();
+    animate();
+
+    function init(){
+
+      container = document.createElement('div');
+      document.body.appendChild(container);
+
+      renderer = new THREE.WebGLRenderer();
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      container.appendChild(renderer.domElement);
+
+      window.addEventListener('resize', onWindowResize, false);
+
+      fillScene();
+    }
+
+
+
+    function fillScene(){
+
+      scene = new THREE.Scene();
+      // scene.fog = new THREE.Fog(0x808080, 3000,6000);
+      scene.background = new THREE.Color(0xf0f0f0);
+
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 40000 );
+      camera.position.set(0,0,18);
+      camera.rotation.set(0,0,0);
+      scene.add(camera);
+
+      var spotlight = new THREE.SpotLight(0xff81ff, 1.0);
+      spotlight.position.set( -5, 10, 7.5,);
+      spotlight.angle = 90 * Math.PI / 180;
+      // spotlight.target.position.set( 0,0,0 );
+      spotlight.castShadow = true;
+      scene.add( spotlight );
+
+      let geometry = new THREE.SphereGeometry( 5, 10, 10 );
+      let material = new THREE.MeshPhongMaterial({color:0xff81ff});
+
+      var yu = new THREE.Vector3(geometry.vertices[0].x/2,geometry.vertices[0].y/2,geometry.vertices[0].z/2);
+      geometry.vertices[0].addVectors(geometry.vertices[0], yu);
+
+      var num = geometry.vertices.length-1;
+      var yu = new THREE.Vector3(geometry.vertices[num].x,geometry.vertices[num].y,geometry.vertices[num].z);
+      var normalyu = yu.normalize();
+      var normalscaleyu = normalyu.addScaledVector(normalyu,1/2);
+      geometry.vertices[num].addVectors(geometry.vertices[num], normalscaleyu);
+
+      var num = 50;
+      var yu = new THREE.Vector3(geometry.vertices[num].x,geometry.vertices[num].y,geometry.vertices[num].z);
+      var normalyu = yu.normalize();
+      var normalscaleyu = normalyu.addScaledVector(normalyu,1/2);
+      geometry.vertices[num].addVectors(geometry.vertices[num], normalscaleyu);
+      // geometry.vertices[38].addScalar(5,1,2);
+      // geometry.vertices[82].addScalar(5,10,2);
+      // geometry.vertices[0].addVectors(geometry.vertices[0], yu);
+      console.log(geometry);
+      console.log(geometry.vertices.length);
+
+      cube = new THREE.Mesh( geometry, material )
+      cube.position.set(0,0,0);
+
+      scene.add( cube );
+
+      // console.log(datapack.join(","));
+
+    }
+
+    function onWindowResize() {
+    	windowHalfX = window.innerWidth / 2;
+    	windowHalfY = window.innerHeight / 2;
+
+    	camera.aspect = window.innerWidth / window.innerHeight;
+    	camera.updateProjectionMatrix();
+
+    	renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+    function animate(){
+      requestAnimationFrame(animate);
+    	render();
+      // console.log(datapack.join(","));
+      // console.log(datapack.length);
+    }
+
+    function render(){
+
+      var time = Date.now();
+
+      renderer.render(scene, camera);
+      cube.rotation.y = time*0.0005;
+    }
+
+    </script>
+
+  </body>
+</html>

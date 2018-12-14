@@ -35,7 +35,7 @@ function draw() {
   background(0, 10);
 
   noStroke();
-  
+
   for (var i = 0; i < sparkles.length; i = i + 1) {
     var sparkle = sparkles[i];
 
@@ -60,6 +60,22 @@ function draw() {
 }
 
 function mousePressed() {
+  for (var i = 0; i < 30; i = i + 1) {
+    var angle = random(TWO_PI);
+    var distance = random(1.5,2);
+
+    sparkles.push({
+      h: random(360),
+      x: mouseX,
+      y: mouseY,
+      vx: distance * sin(angle),
+      vy: distance * cos(angle),
+      frames: 0,
+      diameter:random(3,20)
+    });
+  }
+}
+function mouseDragged() {
   for (var i = 0; i < 30; i = i + 1) {
     var angle = random(TWO_PI);
     var distance = random(1.5,2);

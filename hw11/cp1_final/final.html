@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Something is happening</title>
+  </head>
+  <style media="screen">
+    body{
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      background: #000000;
+    }
+    #defaultCanvas0{
+      position: relative;
+      left: 50%;
+      top: 50%;
+      margin-left: -300px;
+      margin-top: -300px;
+    }
+
+  </style>
+  <body>
+    <!-- <div style="position:fixed;width:100px;margin-left: -50px;left:50%;bottom:2%"><a href="../../index.html">Home</a></div> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="p5.dom.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script type="text/javascript">
+      let table1;
+      let table2;
+      let circles1 = [];
+      let circles2 = [];
+
+      function preload(){
+        table1 = loadTable('table/west.csv', 'csv', 'header');
+        table2 = loadTable('table/south.csv', 'csv', 'header');
+      }
+
+      function setup() {
+        createCanvas(600, 600);
+
+
+        // west;
+        let rows = table1.getRowCount()
+        let columns = table1.getColumnCount()
+        for (var r = 0; r < rows; r++){
+          for (var c = 0; c < columns; c++){
+              circles1.push(new Circle(width/6, r*5, table1.getString(r, 1)*2));
+          }
+        }
+
+        //south
+        let rows2 = table2.getRowCount()
+        let columns2 = table2.getColumnCount()
+        for (var r = 0; r < rows2; r++){
+          for (var c = 0; c < columns2; c++){
+              circles2.push(new Circle(width/6*2, r*5, table2.getString(r, 1)*2));
+          }
+        }
+
+        console.log(table1);
+        console.log(circles1);
+      }
+
+      function draw() {
+
+        background(244);
+        // west
+        for (i = 0; i < circles1.length; i ++){
+          let circle = circles1[i];
+          let col1 = i/circles1.length*255
+          noStroke();
+          fill(color(0, 200, 0, 15));
+          circle.show();
+          circle.update();
+        }
+        //south
+        for (i = 0; i < circles2.length; i ++){
+          let circle = circles2[i];
+          let col1 = i/circles2.length*255
+          noStroke();
+          fill(color(0, 0, 200, 15));
+          circle.show();
+          circle.update();
+        }
+      }
+
+      class Circle {
+        constructor(x,y,w){
+          this.x = x;
+          this.y = y;
+          this.w = w;
+          this.vw = 0.5;
+        }
+
+        show(){
+          ellipse(this.x, this.y, this.w);
+        }
+        update(){
+          // this.w += this.vw
+        }
+
+      }
+
+    </script>
+  </body>
+</html>

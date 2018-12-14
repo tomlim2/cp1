@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Something is happening</title>
+    <link rel="stylesheet" href="css/loadFont.css" type="text/css" media="screen" />
+    <style media="screen">
+      body{
+        font-family: 'fs-m';
+        margin: 0;
+        overflow: hidden;
+
+      }
+      canvas{
+        cursor: grab;
+      }
+      .container{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        pointer-events: none;
+
+      }
+      canvas:active{
+        cursor: grabbing;
+      }
+      .title{
+        position: absolute;
+        left: 1.2em;
+        top: 1.2em;
+        width: 100vw;
+        color: white;
+        font-size: 1.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+          Gobal Land Temperature Anomalies
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="js/data.js"></script>
+    <script src="build/three.js"></script>
+    <script src="build/CSS2DRenderer.js"></script>
+    <script src="js/webgl.js"></script>
+  </body>
+</html>

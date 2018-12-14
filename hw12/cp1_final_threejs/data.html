@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Read CSV</h3>
+    <div id="output">
+
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "csv/south.csv",
+          dataType: "text",
+          success: function(data) {processData(data);}
+       });
+    });
+
+    function processData(allText) {
+      var allTextLines = allText.split(/\r\n|\n/);
+      var headers = allTextLines[1].split(',');
+      var lines = [];
+
+      for (var i=2; i<allTextLines.length; i++) {
+          var data = allTextLines[i].split(',');
+          if (data.length == headers.length) {
+
+              var tarr = [];
+              for (var j=0; j<headers.length; j++) {
+                  tarr.push(headers[j]+":"+data[j]);
+              }
+              lines.push(tarr);
+              console.log(tarr);
+          }
+      }
+      // alert(lines);
+      console.log(lines);
+    }
+    </script>
+  </body>
+</html>

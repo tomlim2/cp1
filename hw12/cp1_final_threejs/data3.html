@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Read CSV</h3>
+    <div id="output">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script type="text/javascript">
+    let table1;
+    let table2;
+    let circles1 = [];
+    let circles2 = [];
+
+    function preload(){
+      table1 = loadTable('csv/west.csv', 'csv', 'header');
+      table2 = loadTable('csv/south.csv', 'csv', 'header');
+    }
+
+    function setup() {
+      createCanvas(600, 600);
+
+
+      // west;
+      let rows = table1.getRowCount()
+      let columns = table1.getColumnCount()
+      for (var r = 0; r < rows; r++){
+        for (var c = 0; c < columns; c++){
+            circles1.push(table1.getString(r, 1));
+        }
+      }
+
+      //south
+      let rows2 = table2.getRowCount()
+      let columns2 = table2.getColumnCount()
+      for (var r = 0; r < rows2; r++){
+        for (var c = 0; c < columns2; c++){
+            circles2.push(new Circle(width/6*2, r*5, table2.getString(r, 1)*2));
+        }
+      }
+
+    }
+
+    function draw(){
+      background(0);
+
+    }
+
+    </script>
+  </body>
+</html>
