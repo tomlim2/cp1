@@ -1,5 +1,3 @@
-var samples = [1,2,3,4,5,6,7,8,9,10]
-
 class Sphere{
   constructor(x,y,z){
     this.x = x;
@@ -9,14 +7,17 @@ class Sphere{
 
   render(){
     rig2 = new THREE.Group();
+    rig3t = new THREE.Group();
+
     scene.add(rig2);
+    rig2.position.set(this.x, this.y, this.z)
     //m
     for (let i = 0; i < 10; i++) {
-      let geometry = new THREE.SphereGeometry( 5, 30, 30 );
-      let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
-      // let material = new THREE.MeshDepthMaterial({wireframe:true, wireframeLinewidth: 10 });
       rig1 = new THREE.Group();
       rig1.rotation.y = 360/10*Math.PI/180*i;
+      //mesh
+      let geometry = new THREE.SphereGeometry( 5, 30, 30 );
+      let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
 
       for (let r = 2; r < datapack.length; r++) {
         let sample = datapack[r][i+3]*5;
@@ -25,15 +26,55 @@ class Sphere{
         var nmvc = vc.normalize();
         var scnmvc = nmvc.addScaledVector(nmvc, sample);
         vertices.addVectors(vertices, scnmvc);
-        console.log(sample)
+        // console.log(sample)
       }
       // sphereGeo = new THREE.BufferGeometry().fromGeometry( geometry );
-      sphere = new THREE.Mesh(geometry, material);
+      sphereGeo = new THREE.BufferGeometry().fromGeometry( geometry );
+      sphere = new THREE.Mesh(sphereGeo, material);
       sphere.position.set(0, Math.random()*2,50);
+      sphere.rotation.x = 180*Math.PI/180;
       sphere.castShadow = true; //default is false
       sphere.receiveShadow = true;
       rig1.add(sphere);
+
+
+      //label
+      var loader = new THREE.FontLoader();
+
+      loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+        let geometry = new THREE.TextGeometry( dataheader[0][i+3], {
+          font: font,
+          size: 1,
+          height: .2,
+          curveSegments: 0,
+          bevelEnabled: false,
+          bevelThickness: 0,
+          bevelSize: 0,
+          bevelSegments: 0
+
+        } );
+
+
+        geometry.computeBoundingBox()
+        var centerOffset = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+        let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
+        textGeo = new THREE.BufferGeometry().fromGeometry( geometry );
+        textMesh1 = new THREE.Mesh(textGeo,material);
+        textMesh1.position.set(centerOffset,0,0);
+
+        rig1t = new THREE.Group();
+        rig1t.position.set(0,-7,50);
+        rig1t.add(textMesh1);
+
+        rig2t = new THREE.Group();
+        rig2t.add(rig1t);
+        rig2t.rotation.y = 360/10*Math.PI/180*i;
+
+        rig3t.add(rig2t);
+        } );
+      //labelend
       rig2.add(rig1);
+      scene.add(rig3t);
     }
 }
 
@@ -42,19 +83,21 @@ class Sphere{
     // sphere.rotation.y += .005;
     rig2.children.forEach(function(child,index){
       child.children.forEach(function(child,index){
-          child.rotation.y += .003;
+          child.rotation.y -= .001;
       })
     })
-
-
     rig2.rotation.y += (targetRotation - rig2.rotation.y) * 0.05
+    rig3t.rotation.y += (targetRotation - rig3t.rotation.y) * 0.05
   }
 }
 
 
 let datapack = [];
+let dataheader = [];
 let container;
-let camera, scene, light, renderer, sphere, time, rig1, rig2;
+let camera, scene, light, renderer, sphere, sphereGeo, time, rig1, rig2
+let rig1t, rig2t, rig3t, textGeo, textMesh1, centerOffset;
+
 let spheres = [];
 var targetRotation = 0;
 var targetRotationOnMouseDown = 0;
@@ -97,8 +140,8 @@ function fillScene(){
   camera.rotation.set(0,0,0);
   scene.add(camera);
 
-  var spotlight = new THREE.SpotLight(0xff0000, 0.9);
-  spotlight.position.set( 3, -5, 70);
+  var spotlight = new THREE.SpotLight(0xff0000, 1);
+  spotlight.position.set( -4, 5, 70);
   spotlight.target.position.set( 0,0,0 );
   spotlight.castShadow = true;
   spotlight.angle = 140*Math.PI/180;
@@ -106,8 +149,8 @@ function fillScene(){
   spotlight.distance = 100;
   scene.add( spotlight );
 
-  var spotlight = new THREE.SpotLight(0x00ff00, 0.9);
-  spotlight.position.set( -3, 5, 70);
+  var spotlight = new THREE.SpotLight(0x00ff00, 1);
+  spotlight.position.set( 4, -5, 70);
   spotlight.target.position.set( 0,0,0 );
   spotlight.castShadow = true;
   spotlight.angle = 140*Math.PI/180;
@@ -121,7 +164,7 @@ function fillScene(){
 
   spheres.push(new Sphere(0,0,0));
   spheres[0].render();
-  console.log(spheres[0])
+  // console.log(spheres[0])
 
 
 }

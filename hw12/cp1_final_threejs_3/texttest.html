@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Interactions</title>
+    <style media="screen">
+      body{
+        margin: 0;
+        overflow: hidden;
+        font-family: Monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="build/three.js"></script>
+    <!-- <script src="js/utils/GeometryUtils.js"></script> -->
+
+    <script type="text/javascript">
+      var container;
+      var camera, scene, renderer;
+
+      var text = "three.js",
+
+				height = 20,
+				size = 5,
+				hover = 30,
+
+				curveSegments = 4,
+
+				bevelThickness = 1,
+				bevelSize = 0.5,
+				bevelEnabled = true,
+
+        font = undefined;
+
+
+
+      var windowHalfX = window.innerWidth/2;
+      var windowHalfY = window.innerHeight/2;
+
+
+
+      init();
+      animate();
+
+      function  init(){
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        window.addEventListener('resize',onWindowResize,false);
+        fillScene();
+
+      }
+
+      function fillScene(){
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf0f0f0);
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 40000 );
+        camera.position.set(0,0,40);
+        camera.rotation.set(0,0,0);
+        scene.add(camera);
+
+        var spotlight = new THREE.SpotLight(0xff0000, 0.9);
+        spotlight.position.set( 3, -5, 30);
+        spotlight.target.position.set( 0,0,0 );
+        spotlight.castShadow = true;
+        spotlight.angle = 140*Math.PI/180;
+        spotlight.penumbra = 0.2;
+        spotlight.distance = 100;
+        scene.add( spotlight );
+
+        group = new THREE.Group();
+        createText()
+        scene.add(group);
+
+      }
+
+
+      // function loadFont(){
+      //   var loader = new THREE.FontLoader();
+      //   loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+      //
+      //     createText();
+      //
+      //   });
+      // }
+
+      function createText(){
+        // ex1
+                var loader = new THREE.FontLoader();
+
+                loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+                	let geometry = new THREE.TextGeometry( 'Hello', {
+                		font: font,
+                		size: 10,
+                		height: 2,
+                		curveSegments: 0,
+                		bevelEnabled: false,
+                		bevelThickness: 0,
+                		bevelSize: 0,
+                		bevelSegments: 0
+
+                	} );
+                  // console.log(geometry);
+                  geometry.computeBoundingBox()
+                  // console.log(geometry.boundingBox);
+                  var centerOffset = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+                  let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
+                  textGeo = new THREE.BufferGeometry().fromGeometry( geometry );
+                  sphere = new THREE.Mesh(textGeo,material);
+
+
+                  sphere.position.x = centerOffset;
+                  group.add(sphere);
+                } );
+
+        // ex2
+                // let geometry = new THREE.TextGeometry( text, {
+                //   font: font,
+                //
+        				// 	size: size,
+        				// 	height: height,
+        				// 	curveSegments: curveSegments,
+                //
+        				// 	bevelThickness: bevelThickness,
+        				// 	bevelSize: bevelSize,
+        				// 	bevelEnabled: bevelEnabled
+                // });
+                //
+                //
+                // let material = new THREE.MeshLambertMaterial({color:0xf0f0f0, });
+                // textMesh1 = new THREE.Mesh(geometry,material);
+                // var centerOffset = - 0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+                //
+        				// textGeo = new THREE.BufferGeometry().fromGeometry( textGeo );
+                //
+        				// textMesh1 = new THREE.Mesh( textGeo, materials );
+                //
+        				// textMesh1.position.x = centerOffset;
+        				// textMesh1.position.y = hover;
+        				// textMesh1.position.z = 0;
+                // group.add(textMesh1);
+      }
+
+      function refreshText() {
+
+			}
+
+
+      function onWindowResize(){
+        windowHalfX = window.innerWidth/2;
+        windowHalfY = window.innerHeight/2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth,window.innerHeight);
+
+      }
+
+      function animate(){
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render(){
+        var time = Date.now();
+
+
+        renderer.render(scene,camera);
+
+      }
+
+
+    </script>
+  </body>
+</html>
