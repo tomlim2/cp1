@@ -31,7 +31,7 @@ class Sphere{
       // sphereGeo = new THREE.BufferGeometry().fromGeometry( geometry );
       sphereGeo = new THREE.BufferGeometry().fromGeometry( geometry );
       sphere = new THREE.Mesh(sphereGeo, material);
-      sphere.position.set(0, Math.random()*2,50);
+      sphere.position.set(0, 0,50);
       sphere.rotation.x = 180*Math.PI/180;
       sphere.castShadow = true; //default is false
       sphere.receiveShadow = true;
@@ -195,7 +195,7 @@ function onDocumentMouseDown(event){
 function onDocumentMouseMove(event){
   mouseX = event.clientX - windowHalfX;
   mouseY = event.clientY - windowHalfY;
-  targetRotation = targetRotationOnMouseDown + (mouseY + mouseX - mouseXOnMouseDown)* 0.001;
+  targetRotation = targetRotationOnMouseDown + (mouseX - mouseXOnMouseDown)* 0.001;
 }
 
 function onDocumentMouseUp(event){
