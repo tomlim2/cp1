@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Avalon</title>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
+    <style media="screen">
+    body{
+      font-family: 'Josefin Sans', sans-serif;
+      animation: colorprss1 15s linear infinite;
+    }
+    h1{
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 100px;
+    }
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      width: 100vw;
+      height: 100vh;
+      background-image: url('367_7.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 50% 50%;
+
+    }
+
+    @keyframes colorprss1 {
+      0%{
+        background-color: #004b85;
+      }
+      50%{
+        background-color: #006553;
+      }
+      100%{
+        background-color: #004b85;
+      }
+    }
+
+    .img1{
+      height: 100vh;
+    }
+    .slogun{
+      position: fixed;
+      z-index: 10;
+      left: 40px;
+      top: 40px;
+      color: white;
+      font-size: 1.6em;
+      opacity: 0.98;
+      filter: drop-shadow(3px 3px 0px rgba(255,255,255,0.3));
+    }
+    .description{
+      border: dotted 2px rgba(25,25,25,0.5);
+      background-color: white;
+      position: fixed;
+      right: 60px;
+      bottom: 20px;
+      color: rgba(25,25,25,0.9));
+      padding: 2em;
+      width: 28%;
+      filter: drop-shadow(3px 3px 0px rgba(255,255,255,0.5));
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="advertise">
+          <!-- <img class="img1" src="367_7.png" alt=""> -->
+          <div class="slogun">
+            Stay your enternal,
+            <h1>Avalon</h1>
+          </div>
+          <div class="description">
+            Why 'AVALON'?
+            <br/><br/>
+            <ul>
+              <li>Free MoveIn MoveOut</li>
+              <li>Digitizing Personality</li>
+              <li>Non-Gravity Capsule</li>
+              <li>Auto Care System</li>
+              <li>Fifth Generation VR</li>
+              <li>Legal Eternal Rest</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+
+  </body>
+</html>
